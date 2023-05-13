@@ -57,20 +57,31 @@ function draw()
 	})
 }
 
-
-function clearEtch()
+function resetGrid()
 {
-	const clearButton = document.querySelector("#cleaner");
 	const rows = document.querySelectorAll(".row");
-	
-	clearButton.addEventListener("click", (event) =>
-	{
-		rows.forEach(row => row.remove());
-		makeGrid(30);
-		draw();
-	});
+	const gridSize = document.querySelector("#sizeRange");
+
+	rows.forEach(row => row.remove());
+	makeGrid(gridSize.value);
+	draw();
 }
 
-makeGrid(30);
+function clearButtonHandler()
+{
+	const clearButton = document.querySelector("#cleaner");
+	
+	clearButton.addEventListener("click", resetGrid);
+}
+
+function gridSizeHandler()
+{
+	const rangeButton = document.querySelector("#sizeRange");
+
+	rangeButton.addEventListener("input", (event) => resetGrid() );
+}
+
+makeGrid(document.querySelector("#sizeRange").value);
 draw();
-clearEtch();
+clearButtonHandler();
+gridSizeHandler();
