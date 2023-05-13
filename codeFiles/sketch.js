@@ -13,16 +13,64 @@ function makeGrid(gridSize)
 
 			square.classList.add("square");
 			row.appendChild(square);
-			square.style.width = `${420 / gridSize - 2}`;
-			square.style.height = `${420 / gridSize - 2}`;
+			square.style.width = `${420 / gridSize}`;
+			square.style.height = `${420 / gridSize}`;
 		}
 		mainEtchDiv.appendChild(row);
 	}
 }
 
-makeGrid(50);
+function draw()
+{
+	let sq;
+	let clicked;
+	let colorPicker;
+	
+	colorPicker = document.querySelector("#picker");
+	sq = document.querySelectorAll(".square");
+	clicked = false
+	
+	sq.forEach(sq => 
+	{
+		sq.addEventListener("mousedown", (event) =>
+		{
+			clicked = true;
+			sq.style.backgroundColor = colorPicker.value;
+		});
+	})
+	
+	sq.forEach(sq => 
+	{
+		sq.addEventListener("mouseover", (event) =>
+		{
+			if (clicked)
+				sq.style.backgroundColor = colorPicker.value;
+		});
+	});
+	
+	sq.forEach(sq =>
+	{
+		sq.addEventListener("mouseup", (event) =>
+		{
+			clicked = false;
+		});
+	})
+}
 
-// Color Picker
-// Grid size
-// Reset
-// Eraser
+
+function clearEtch()
+{
+	const clearButton = document.querySelector("#cleaner");
+	const rows = document.querySelectorAll(".row");
+	
+	clearButton.addEventListener("click", (event) =>
+	{
+		rows.forEach(row => row.remove());
+		makeGrid(30);
+		draw();
+	});
+}
+
+makeGrid(30);
+draw();
+clearEtch();
