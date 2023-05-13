@@ -1,6 +1,7 @@
-function makeGrid(gridSize)
+function makeGrid()
 {
 	const mainEtchDiv = document.querySelector("#etch");
+	let gridSize = document.querySelector("#sizeRange").value;
 
 	for (let i = 0; i < gridSize; i++)
 	{
@@ -13,8 +14,18 @@ function makeGrid(gridSize)
 
 			square.classList.add("square");
 			row.appendChild(square);
-			square.style.width = `${420 / gridSize}`;
-			square.style.height = `${420 / gridSize}`;
+			if (!isActivated)
+			{
+				square.style.width = `${420 / gridSize}px`;
+				square.style.height = `${420 / gridSize}px`;
+				square.style.border = "";
+			}
+			else
+			{
+				square.style.width = `${420 / gridSize - 1}px`;
+				square.style.height = `${420 / gridSize - 1}px`;
+				square.style.border = "0.5px solid black";
+			}
 		}
 		mainEtchDiv.appendChild(row);
 	}
@@ -63,7 +74,7 @@ function resetGrid()
 	const gridSize = document.querySelector("#sizeRange");
 
 	rows.forEach(row => row.remove());
-	makeGrid(gridSize.value);
+	makeGrid();
 	draw();
 }
 
@@ -77,11 +88,47 @@ function clearButtonHandler()
 function gridSizeHandler()
 {
 	const rangeButton = document.querySelector("#sizeRange");
+	const rangeInfo = document.querySelector("h4");
 
-	rangeButton.addEventListener("input", (event) => resetGrid() );
+	rangeButton.addEventListener("input", (event) =>
+	{
+		rangeInfo.textContent = rangeButton.value + " x " + rangeButton.value;
+		resetGrid()
+	});
 }
 
-makeGrid(document.querySelector("#sizeRange").value);
+function gridLinesHandler()
+{
+	const gridShowButton = document.querySelector("#gridButton");
+
+	gridShowButton.addEventListener("click", (event) =>
+	{
+		const squares = document.querySelectorAll(".square");
+		const oldSize = parseFloat(squares[0].style.width.replaceAll(/[a-z]/g, ""));
+
+		squares.forEach(square =>
+		{
+			if (!isActivated)
+			{
+				square.style.width = oldSize - 1 + "px";
+				square.style.height = oldSize - 1 + "px";
+				square.style.border = "0.5px solid black";
+			}
+			else if (isActivated)
+			{
+				square.style.width = oldSize + 1 + "px";
+				square.style.height = oldSize + 1 + "px";
+				square.style.border = "";
+			}
+		});
+			isActivated = !isActivated;
+	});
+}
+
+let isActivated = false;
+
+makeGrid();
 draw();
 clearButtonHandler();
 gridSizeHandler();
+gridLinesHandler();
