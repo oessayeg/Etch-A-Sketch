@@ -16,12 +16,37 @@
 	<header>
 		<h1>Etch-A-Sketch</h1>
 	</header>
+
 	<main>
-		<div id="options">
+		<!-- Left part that contains the options -->
+		<div id="optionPart">
+			<div id="colorPicker">
+				<input type="color">
+			</div>
+			
+			<div id="colorOption">
+				<button>Color mode</button>
+			</div>
+			<div id="rainbowOption">
+				<button>Rainbow mode</button>
+			</div>
+			<div id="eraserOption">
+				<button>Eraser</button>
+			</div>
+			<div id="gridSizePicker">
+				<input type="range">
+			</div>
+			<div id="clearOption">
+				<button>Clear</button>
+			</div>
 		</div>
 
-		<div id="etch">
-
+		<!-- Right part that contains the etch-a-sketch -->
+		<div id="etchPart">
+			<div id="gridButtonDiv">
+				<button id="gridButton">Show grid lines</button>
+			</div>
+			<div id="etch"> </div>
 		</div>
 
 	</main>

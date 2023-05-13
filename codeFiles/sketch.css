@@ -9,19 +9,29 @@ main
 {
 	display: flex;
 	justify-content: center;
-	/* gap: 30px; */
+	gap: 140px;
 }
 
 #etch
 {
-	width: 400px;
-	height: 400px;
+	width: 420px;
+	height: 420px;
 	border: 4px solid black;
-	display: flex;
-	justify-content: center;
 }
 
 .square
 {
 	box-shadow: 1px 1px black;
+}
+
+#etchPart
+{
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+#gridButtonDiv
+{
+	text-align: center;
 }
