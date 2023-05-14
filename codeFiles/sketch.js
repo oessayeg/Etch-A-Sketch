@@ -14,7 +14,7 @@ function makeGrid()
 
 			square.classList.add("square");
 			row.appendChild(square);
-			if (!isActivated)
+			if (!isGridButtonActivated)
 			{
 				square.style.width = `${420 / gridSize}px`;
 				square.style.height = `${420 / gridSize}px`;
@@ -24,7 +24,7 @@ function makeGrid()
 			{
 				square.style.width = `${420 / gridSize - 1}px`;
 				square.style.height = `${420 / gridSize - 1}px`;
-				square.style.border = "0.5px solid black";
+				square.style.border = "0.5px solid grey";
 			}
 		}
 		mainEtchDiv.appendChild(row);
@@ -46,7 +46,12 @@ function draw()
 		sq.addEventListener("mousedown", (event) =>
 		{
 			clicked = true;
-			sq.style.backgroundColor = colorPicker.value;
+			if (isEraserActivated)
+				sq.style.backgroundColor = "white";
+			else if (isRainbowModeActivated)
+				sq.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+			else
+				sq.style.backgroundColor = colorPicker.value;
 		});
 	})
 	
@@ -55,7 +60,14 @@ function draw()
 		sq.addEventListener("mouseover", (event) =>
 		{
 			if (clicked)
-				sq.style.backgroundColor = colorPicker.value;
+			{
+				if (isEraserActivated)
+					sq.style.backgroundColor = "white";
+				else if (isRainbowModeActivated)
+					sq.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+				else
+					sq.style.backgroundColor = colorPicker.value;
+			}
 		});
 	});
 	
@@ -108,27 +120,57 @@ function gridLinesHandler()
 
 		squares.forEach(square =>
 		{
-			if (!isActivated)
+			if (!isGridButtonActivated)
 			{
 				square.style.width = oldSize - 1 + "px";
 				square.style.height = oldSize - 1 + "px";
-				square.style.border = "0.5px solid black";
+				square.style.border = "0.5px solid grey";
 			}
-			else if (isActivated)
+			else if (isGridButtonActivated)
 			{
 				square.style.width = oldSize + 1 + "px";
 				square.style.height = oldSize + 1 + "px";
 				square.style.border = "";
 			}
 		});
-			isActivated = !isActivated;
+			isGridButtonActivated = !isGridButtonActivated;
 	});
 }
 
-let isActivated = false;
+function colorModesHandler()
+{
+	const eraseButton = document.querySelector("#eraser");
+	const rainbowButton = document.querySelector("#rainbowButton");
+	const colorModeButton = document.querySelector("#colorButton");
+
+	eraseButton.addEventListener("click", (event) =>
+	{
+		isEraserActivated = !isEraserActivated;
+		isRainbowModeActivated = false;
+		console.log(isRainbowModeActivated, isEraserActivated);
+	});
+
+	rainbowButton.addEventListener("click", (event) =>
+	{
+		isRainbowModeActivated = !isRainbowModeActivated;
+		isEraserActivated = false;
+		console.log(isRainbowModeActivated, isEraserActivated);
+	});
+
+	colorModeButton.addEventListener("click", (event) =>
+	{
+		isRainbowModeActivated = false;
+		isEraserActivated = false;
+	});
+}
+
+let isGridButtonActivated = false;
+let isEraserActivated = false;
+let isRainbowModeActivated = false;
 
 makeGrid();
 draw();
 clearButtonHandler();
 gridSizeHandler();
 gridLinesHandler();
+colorModesHandler();
