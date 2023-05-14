@@ -133,7 +133,8 @@ function gridLinesHandler()
 				square.style.border = "";
 			}
 		});
-			isGridButtonActivated = !isGridButtonActivated;
+		isGridButtonActivated = !isGridButtonActivated;
+		colorButton(isGridButtonActivated, gridShowButton);
 	});
 }
 
@@ -147,19 +148,42 @@ function colorModesHandler()
 	{
 		isEraserActivated = !isEraserActivated;
 		isRainbowModeActivated = false;
+		colorButton(true, eraseButton);
+		colorButton(false, rainbowButton);
+		colorButton(false, colorModeButton);
 	});
 
 	rainbowButton.addEventListener("click", (event) =>
 	{
 		isRainbowModeActivated = !isRainbowModeActivated;
 		isEraserActivated = false;
+		colorButton(true, rainbowButton);
+		colorButton(false, eraseButton);
+		colorButton(false, colorModeButton);
 	});
 
 	colorModeButton.addEventListener("click", (event) =>
 	{
 		isRainbowModeActivated = false;
 		isEraserActivated = false;
+		colorButton(true, colorModeButton);
+		colorButton(false, rainbowButton);
+		colorButton(false, eraseButton);
 	});
+}
+
+function colorButton(isActivated, query)
+{
+	if (isActivated)
+	{
+		query.style.backgroundColor = "#360f00";
+		query.style.color = "#F6F1E9";
+	}
+	else
+	{
+		query.style.backgroundColor = "";
+		query.style.color = "#360f00";
+	}
 }
 
 let isGridButtonActivated = false;
@@ -172,3 +196,4 @@ clearButtonHandler();
 gridSizeHandler();
 gridLinesHandler();
 colorModesHandler();
+colorButton(true, document.querySelector("#colorButton"));
