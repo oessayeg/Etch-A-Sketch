@@ -3,6 +3,7 @@ header
 	font-family: 'Coiny', cursive;
 	text-align: center;
 	font-size: 27px;
+	margin-bottom: 54px;
 }
 
 main
@@ -69,17 +70,20 @@ button, input[type="range"]
 
 input[type="range"]:hover
 {
-	transform: scale(1.02);
+	transform: scale(1.06);
 }
 
 button
 {
+	font-family: 'Itim', cursive;
+	font-size: 17px;
 	width: 155px;
 	height: 35px;
 }
 
 h4
 {
+	font-family: 'Itim', cursive;
 	font-size: 17px;
 	margin-top: -8px;
 	margin-bottom: 7px;
