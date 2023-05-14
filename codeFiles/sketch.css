@@ -8,7 +8,7 @@ header
 	font-family: 'Coiny', cursive;
 	color: #360f00;
 	text-align: center;
-	font-size: 27px;
+	font-size: 31px;
 	margin-bottom: 54px;
 }
 
@@ -128,4 +128,20 @@ input[type="range"]
 	width: 100%;
 	border-radius: 30px;
 	border: 1px solid #360f00;
+}
+
+#cleaner:active
+{
+	opacity: 0.6;
+}
+
+footer
+{
+	font-size: 20px;
+	margin-top: 60px;
+	display: flex;
+	justify-content: center;
+	color:#360f00 ;
+	align-items: center;
+	gap: 10px;
 }

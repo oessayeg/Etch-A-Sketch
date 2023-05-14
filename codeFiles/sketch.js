@@ -46,9 +46,9 @@ function draw()
 		sq.addEventListener("mousedown", (event) =>
 		{
 			clicked = true;
-			if (isEraserActivated)
+			if (mode == "eraseMode")
 				sq.style.backgroundColor = "white";
-			else if (isRainbowModeActivated)
+			else if (mode == "rainbowMode")
 				sq.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 			else
 				sq.style.backgroundColor = colorPicker.value;
@@ -61,9 +61,9 @@ function draw()
 		{
 			if (clicked)
 			{
-				if (isEraserActivated)
+				if (mode == "eraseMode")
 					sq.style.backgroundColor = "white";
-				else if (isRainbowModeActivated)
+				else if (mode == "rainbowMode")
 					sq.style.backgroundColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
 				else
 					sq.style.backgroundColor = colorPicker.value;
@@ -146,8 +146,7 @@ function colorModesHandler()
 
 	eraseButton.addEventListener("click", (event) =>
 	{
-		isEraserActivated = !isEraserActivated;
-		isRainbowModeActivated = false;
+		mode = "eraseMode";
 		colorButton(true, eraseButton);
 		colorButton(false, rainbowButton);
 		colorButton(false, colorModeButton);
@@ -155,8 +154,7 @@ function colorModesHandler()
 
 	rainbowButton.addEventListener("click", (event) =>
 	{
-		isRainbowModeActivated = !isRainbowModeActivated;
-		isEraserActivated = false;
+		mode = "rainbowMode";
 		colorButton(true, rainbowButton);
 		colorButton(false, eraseButton);
 		colorButton(false, colorModeButton);
@@ -164,8 +162,7 @@ function colorModesHandler()
 
 	colorModeButton.addEventListener("click", (event) =>
 	{
-		isRainbowModeActivated = false;
-		isEraserActivated = false;
+		mode = "colorMode";
 		colorButton(true, colorModeButton);
 		colorButton(false, rainbowButton);
 		colorButton(false, eraseButton);
@@ -187,8 +184,7 @@ function colorButton(isActivated, query)
 }
 
 let isGridButtonActivated = false;
-let isEraserActivated = false;
-let isRainbowModeActivated = false;
+let mode = "colorMode";
 
 makeGrid();
 draw();
