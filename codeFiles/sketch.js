@@ -147,14 +147,12 @@ function colorModesHandler()
 	{
 		isEraserActivated = !isEraserActivated;
 		isRainbowModeActivated = false;
-		console.log(isRainbowModeActivated, isEraserActivated);
 	});
 
 	rainbowButton.addEventListener("click", (event) =>
 	{
 		isRainbowModeActivated = !isRainbowModeActivated;
 		isEraserActivated = false;
-		console.log(isRainbowModeActivated, isEraserActivated);
 	});
 
 	colorModeButton.addEventListener("click", (event) =>
