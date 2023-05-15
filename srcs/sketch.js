@@ -183,13 +183,18 @@ function colorButton(isActivated, query)
 	}
 }
 
+function etchASketch()
+{
+	makeGrid();
+	draw();
+	clearButtonHandler();
+	gridSizeHandler();
+	gridLinesHandler();
+	colorModesHandler();
+	colorButton(true, document.querySelector("#colorButton"));
+}
+
 let isGridButtonActivated = false;
 let mode = "colorMode";
 
-makeGrid();
-draw();
-clearButtonHandler();
-gridSizeHandler();
-gridLinesHandler();
-colorModesHandler();
-colorButton(true, document.querySelector("#colorButton"));
+etchASketch();
